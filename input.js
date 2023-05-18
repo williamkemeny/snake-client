@@ -13,18 +13,23 @@ const setupInput = function (conn) {
   return stdin;
 };
 
+let interval;
+
 const handleUserInput = (key) => {
-  // movement("connect", (connect) => {
-  //   setInterval(() => {
-  //     conn.write("Move: up");
-  //   }, 100);
-  // });
+  const move = function (key) {
+    clearInterval(interval);
+    interval = setInterval(() => {
+      connection.write(key);
+    }, 100);
+  };
   if (key === "\u0003") {
     process.stdout.write("Disconnecting...\n");
     process.exit();
   }
   if (keyObj.hasOwnProperty(key)) {
-    connection.write(keyObj[key]);
+    key === "w" || key === "s" || key === "a" || key === "d"
+      ? move(keyObj[key])
+      : connection.write(keyObj[key]);
   }
 };
 
