@@ -15,6 +15,12 @@ const connect = function () {
     conn.write("Name: WIL");
   });
 
+  // conn.on("connect", (connect) => {
+  //   setInterval(() => {
+  //     conn.write("Move: up");
+  //   }, 100);
+  // });
+
   conn.on("data", (data) => {
     console.log(data);
   });
